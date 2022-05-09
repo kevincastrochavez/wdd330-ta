@@ -1,16 +1,21 @@
 export default class Alert {
   constructor() {}
 
-  async displayAlerts(element) {
-    const data = await fetch("../json/alerts.json");
-    const response = await data.json();
+  getAlerts() {
+    return fetch("../json/alerts.json")
+      .then((response) => response.json())
+      .then((data) => data);
+  }
 
-    if (response) {
+  async displayAlerts(element) {
+    const alerts = await this.getAlerts();
+
+    if (alerts) {
       const alertsContainer = document.getElementById(element);
       const section = document.createElement("section");
       section.classList.add("alert-list");
 
-      response.map((alert) => {
+      alerts.map((alert) => {
         const paragraph = document.createElement("p");
         paragraph.innerHTML = alert.message;
         paragraph.style.backgroundColor = alert.background;
