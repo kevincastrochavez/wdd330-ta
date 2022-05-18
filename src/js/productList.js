@@ -8,14 +8,15 @@ export default class ProductList {
   }
 
   async init() {
-    let filteredList = [];
     const list = await this.dataSource.getData();
-    list.map((tent) => {
+    const filteredList = [];
+
+    list.forEach((tent) => {
       if (
         tent.Id === "880RR" ||
-        tent.Id == "985RF" ||
+        tent.Id === "985RF" ||
         tent.Id === "985PR" ||
-        tent.Id == "344YJ"
+        tent.Id === "344YJ"
       ) {
         filteredList.push(tent);
       }
